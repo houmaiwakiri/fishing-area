@@ -1,14 +1,15 @@
 FROM php:8.3-fpm
 
-# 既存パッケージ更新
+# 必要なパッケージ
 RUN apt-get update && apt-get install -y \
-    zip unzip git curl libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+    git unzip zip curl vim \
+    nodejs npm \
+    && docker-php-ext-install pdo_mysql
 
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 
-COPY . .
-
-CMD ["php-fpm"]
+# npm キャッシュ最適化
+RUN npm install -g npm@latest
