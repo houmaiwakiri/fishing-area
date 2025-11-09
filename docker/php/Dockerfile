@@ -1,17 +1,16 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.2-fpm
 
-# 基本ツールと PHP 拡張
-RUN apk add --no-cache \
-    bash \
-    git \
-    curl \
-    libzip-dev \
-    oniguruma-dev \
-    zip \
-    unzip \
-    && docker-php-ext-install pdo_mysql mbstring zip bcmath
+# 必要な拡張をインストール
+RUN apt-get update && apt-get install -y \
+    zip unzip git libzip-dev \
+    && docker-php-ext-install pdo_mysql
 
-# Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# 作業ディレクトリ
+WORKDIR /var/www/html
 
-WORKDIR /var/www
+# composer インストール
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Laravel 権限設定
+RUN mkdir -p storage bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache

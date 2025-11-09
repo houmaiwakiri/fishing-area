@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FishingSpotModel;
 use Illuminate\Http\Request;
+use App\Models\FishingSpotModel;
 
 class FishingSpotController
 {

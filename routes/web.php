@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FishingSpotController;
 
-Route::get('/', function () {
-    return response()->json(['message' => 'hi']);
-});
+Route::get('/web', [FishingSpotController::class, 'index']);
+Route::post('/web', [FishingSpotController::class, 'store']);
