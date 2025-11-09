@@ -3,26 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\FishingSpotModel;
+use App\Models\FishingSpot;
 
 class FishingSpotController
 {
-    public function index(Request $request)
+    // 全件取得
+    public function index()
     {
-        $prefectureId = $request->query('prefecture_id');
-        $spots = FishingSpotModel::where('prefecture_id', $prefectureId)->get();
+        return response()->json(FishingSpot::all());
+    }
+
+    // 県IDで取得
+    public function getByPrefecture($prefectureId)
+    {
+        $spots = FishingSpot::where('prefecture_id', $prefectureId)->get();
         return response()->json($spots);
     }
 
+    // 詳細取得（釣り場ID指定）
+    public function show($id)
+    {
+        $spot = FishingSpot::findOrFail($id);
+        return response()->json($spot);
+    }
+
+    // 登録
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'prefecture_id' => 'required|integer',
-            'lat' => 'required|numeric',
-            'lng' => 'required|numeric',
-        ]);
-        $spot = FishingSpotModel::create($validated);
+        $spot = FishingSpot::create($request->all());
         return response()->json($spot, 201);
+    }
+
+    // 更新
+    public function update(Request $request, $id)
+    {
+        $spot = FishingSpot::findOrFail($id);
+        $spot->update($request->all());
+        return response()->json($spot);
+    }
+
+    // 削除
+    public function destroy($id)
+    {
+        FishingSpot::destroy($id);
+        return response()->json(['message' => 'deleted']);
     }
 }
