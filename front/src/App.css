@@ -1,42 +1,88 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f9fafb;
+    color: #333;
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* ヘッダー・フッター */
+.app-header,
+.app-footer {
+    background: #1f2937;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    text-align: center;
+    font-weight: 600;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* メイン領域 */
+.app-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* 地図セクション（左） */
+.map-section {
+    flex: 2;
+    background: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #d1d5db;
 }
 
-.card {
-  padding: 2em;
+/* サイドバー（右） */
+.sidebar {
+    flex: 1;
+    background: #ffffff;
+    border-left: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
 }
 
-.read-the-docs {
-  color: #888;
+.sidebar-inner {
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.3rem;
+}
+
+/* スクロール調整 */
+.sidebar-inner::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-inner::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+/* スポットリスト改善 */
+.spot-list-item {
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.spot-list-item:hover {
+    background: #f3f4f6;
+}
+
+.spot-card {
+    backdrop-filter: blur(4px);
+}
+
+.spot-card:hover {
+    background-color: #f9fafb;
 }
