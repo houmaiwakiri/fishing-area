@@ -6,7 +6,11 @@ interface SpotListProps {
 
 export default function SpotList({ spots }: SpotListProps) {
     if (!spots.length) {
-        return <p className="text-gray-500 text-sm mt-2">釣り場情報がありません。</p>;
+        return (
+            <p className="text-sky-800/70 text-sm mt-3 italic text-center">
+                釣り場データがありません
+            </p>
+        );
     }
 
     return (
@@ -15,17 +19,15 @@ export default function SpotList({ spots }: SpotListProps) {
                 <div
                     key={spot.id}
                     className="
-            spot-card bg-white border border-gray-200 rounded-xl shadow-sm
-            hover:shadow-md hover:-translate-y-0.5 
-            transition-all duration-150 ease-in-out
+            spot-card bg-gradient-to-br from-sky-50 to-cyan-50 border border-sky-100
+            rounded-xl shadow-sm hover:shadow-md
+            hover:-translate-y-0.5 transition-all duration-150 ease-in-out
             p-3 cursor-pointer
           "
                 >
-                    <h4 className="font-semibold text-gray-800 text-sm truncate">
+                    <h4 className="font-semibold text-sky-900 text-sm truncate tracking-wide">
                         {spot.name}
                     </h4>
-                    <p className="text-xs text-gray-500 mt-1">
-                    </p>
                 </div>
             ))}
         </div>
