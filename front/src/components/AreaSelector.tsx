@@ -1,45 +1,55 @@
+import { useState } from "react";
 import type { Region, Prefecture } from "../types";
-import regionsData from "../assets/data/regions.json";
+import rawRegionsData from "../assets/data/regions.json";
 
 interface AreaSelectorProps {
-    onSelectPrefecture: (pref: Prefecture) => void;
+  onSelectPrefecture: (pref: Prefecture) => void;
 }
 
+const regionsData = rawRegionsData as Region[];
+
 export default function AreaSelector({ onSelectPrefecture }: AreaSelectorProps) {
-    return (
-        <div className="area-selector">
-            {regionsData.map((region: Region) => (
-                <div key={region.id} className="mb-6">
-                    <h3 className="text-sky-800 font-semibold text-sm mb-3 tracking-wide border-b border-sky-100">
-                        {region.name}
-                    </h3>
-                    <div
-                        className="
-              grid gap-3
-              grid-cols-2 sm:grid-cols-3 md:grid-cols-4
-            "
-                    >
-                        {region.prefectures.map((pref) => (
-                            <button
-                                key={pref.id}
-                                onClick={() => onSelectPrefecture(pref)}
-                                className="
-                  bg-gradient-to-br from-sky-50 to-cyan-50
-                  border border-sky-100
-                  rounded-xl p-3 sm:p-4 min-h-[60px]
-                  text-sky-800 font-medium text-sm sm:text-base
-                  shadow-sm hover:shadow-md
-                  transition-all duration-150 ease-in-out
-                  active:scale-[0.97] hover:-translate-y-[1px]
-                  focus:outline-none
-                "
-                            >
-                                {pref.name}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            ))}
-        </div>
+  // 各地方の開閉状態を記録
+  const [openRegionIds, setOpenRegionIds] = useState<number[]>([]);
+
+  const toggleRegion = (id: number) => {
+    setOpenRegionIds((prev) =>
+      prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]
     );
+  };
+
+  return (
+    <div className="area-selector">
+      {regionsData.map((region) => {
+        const isOpen = openRegionIds.includes(region.id);
+        return (
+          <div key={region.id} className="region-block">
+            <button
+              className={`region-title ${isOpen ? "open" : ""}`}
+              onClick={() => toggleRegion(region.id)}
+            >
+              <span>{region.name}</span>
+              <span className="region-toggle">{isOpen ? "−" : "+"}</span>
+            </button>
+
+            <div
+              className={`prefecture-grid-wrapper ${isOpen ? "open" : "collapsed"}`}
+            >
+              <div className="prefecture-grid">
+                {region.prefectures.map((pref) => (
+                  <button
+                    key={pref.id}
+                    className="prefecture-card"
+                    onClick={() => onSelectPrefecture(pref)}
+                  >
+                    {pref.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
