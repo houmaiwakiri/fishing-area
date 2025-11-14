@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            FishesSeeder::class,           // 魚マスタ登録
+            FishingSpotSeeder::class,      // 釣り場登録
+            FishingSpotFishSeeder::class,  // 中間テーブル登録
         ]);
     }
 }

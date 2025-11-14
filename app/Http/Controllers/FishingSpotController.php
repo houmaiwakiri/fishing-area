@@ -10,13 +10,17 @@ class FishingSpotController
     // 全件取得
     public function index()
     {
-        return response()->json(FishingSpot::all());
+        $spots = FishingSpot::with('fishes')->get();
+        return response()->json($spots);
     }
 
     // 県IDで取得
     public function getByPrefecture($prefectureId)
     {
-        $spots = FishingSpot::where('prefecture_id', $prefectureId)->get();
+        $spots = FishingSpot::with('fishes')
+            ->where('prefecture_id', $prefectureId)
+            ->get();
+
         return response()->json($spots);
     }
 
