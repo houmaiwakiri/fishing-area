@@ -1,199 +1,243 @@
 /* ===============================
-   共通レイアウト
-=============================== */
-
+   全体レイアウト
+================================= */
 .app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
-  color: #1e3a8a;
-  font-family: "Inter", "Noto Sans JP", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+    color: #1e3a8a;
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
+/* ===============================
+   ヘッダー / フッター
+================================= */
 .app-header,
 .app-footer {
-  background: linear-gradient(to right, #0369a1, #0ea5e9);
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+    background: linear-gradient(to right, #0369a1, #0ea5e9);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
 /* ===============================
    メイン構造
-=============================== */
-
+================================= */
 .app-main {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-.map-section {
-  flex: 2;
-  background: #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #d1d5db;
+/* ===============================
+   マップ領域（左）
+================================= */
+.map-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
+.map-view {
+    flex: 0 0 60vh;
+    /* 地図の高さ固定（例: 60% viewport height） */
+    background: #fff;
+    border-right: 1px solid #d1d5db;
+    overflow: hidden;
+}
+
+.map-view>div {
+    height: 100%;
+    width: 100%;
+}
+
+/* Leafletデフォルトの灰色背景を無効化 */
+.leaflet-container {
+    background: none !important;
+}
+
+/* ===============================
+   釣り場一覧（地図下）
+================================= */
+.spot-list-wrapper {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    overflow-y: auto;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+}
+
+.spot-section-title {
+    color: #0369a1;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #0284c7;
+    padding-bottom: 0.3rem;
+}
+
+/* ===============================
+   サイドバー（右）
+================================= */
 .sidebar {
-  flex: 1;
-  background: #ffffff;
-  border-left: 1px solid #e5e7eb;
-  display: flex;
-  flex-direction: column;
+    flex: 0 0 320px;
+    /* 固定幅 */
+    background: #ffffff;
+    border-left: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar-inner {
-  padding: 1rem;
-  overflow-y: auto;
+    padding: 0.8rem;
+    overflow-y: auto;
 }
 
 .sidebar-inner::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 
 .sidebar-inner::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+    background: #cbd5e1;
+    border-radius: 3px;
 }
 
 /* ===============================
-   セクションタイトル
-=============================== */
-
-.section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 2px solid #0284c7;
-  color: #075985;
-  letter-spacing: 0.02em;
-}
-
-/* ===============================
-   SpotList（釣り場リスト）
-=============================== */
-
-.spot-list-item {
-  padding: 0.5rem;
-  border-radius: 6px;
-  margin-bottom: 4px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.spot-list-item:hover {
-  background: #f3f4f6;
-}
-
-.spot-card {
-  backdrop-filter: blur(6px);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.spot-card:hover {
-  background: linear-gradient(to bottom right, #e0f2fe, #bae6fd);
-  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.15);
-}
-
-/* ===============================
-   AreaSelector（地方と都道府県）
-=============================== */
-
+   地方折りたたみセクション
+================================= */
 .area-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-/* --- 地方見出し --- */
 .region-block {
-  width: 100%;
+    width: 100%;
 }
 
+/* 折りたたみタイトル（地方名） */
 .region-title {
-  width: 100%;
-  background: linear-gradient(to right, #0369a1, #0284c7);
-  color: white;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(3, 105, 161, 0.15);
-  transition: background 0.2s ease;
+    width: 100%;
+    background: linear-gradient(to right, #0369a1, #0284c7);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(3, 105, 161, 0.15);
+    transition: background 0.2s ease;
+    font-size: 0.95rem;
 }
 
 .region-title:hover {
-  background: linear-gradient(to right, #0284c7, #0ea5e9);
+    background: linear-gradient(to right, #0284c7, #0ea5e9);
 }
 
 .region-toggle {
-  font-size: 1.2rem;
-  font-weight: bold;
-  opacity: 0.85;
+    font-size: 1.2rem;
+    font-weight: bold;
+    opacity: 0.85;
 }
 
-/* --- 折りたたみアニメーション --- */
+/* 折りたたみ内容 */
 .prefecture-grid-wrapper {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, opacity 0.25s ease;
-  opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    opacity: 0;
 }
 
 .prefecture-grid-wrapper.open {
-  max-height: 500px;
-  opacity: 1;
-  margin-top: 0.5rem;
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 0.5rem;
 }
 
-/* --- 都道府県カード --- */
+/* ===============================
+   都道府県カード（海系デザイン）
+================================= */
 .prefecture-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
 }
 
 .prefecture-card {
-  background: white;
-  border: 1px solid #e0f2fe;
-  border-radius: 14px;
-  padding: 0.8rem 1rem;
-  color: #0369a1;
-  font-weight: 500;
-  font-size: 0.95rem;
-  box-shadow: 0 1px 3px rgba(3, 105, 161, 0.08);
-  transition: all 0.25s ease;
+    background: white;
+    border: 1px solid #e0f2fe;
+    border-radius: 14px;
+    padding: 0.8rem 1rem;
+    color: #0369a1;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 3px rgba(3, 105, 161, 0.08);
+    transition: all 0.25s ease;
+    text-align: center;
+    cursor: pointer;
 }
 
 .prefecture-card:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(to bottom right, #f0faff, #e0f7ff);
-  box-shadow: 0 4px 10px rgba(3, 105, 161, 0.15);
+    transform: translateY(-2px);
+    background: linear-gradient(to bottom right, #f0faff, #e0f7ff);
+    box-shadow: 0 4px 10px rgba(3, 105, 161, 0.15);
 }
 
 .prefecture-card:active {
-  transform: scale(0.97);
+    transform: scale(0.97);
 }
 
-/* --- スマホ対応 --- */
-@media (max-width: 640px) {
-  .prefecture-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
+.prefecture-card:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.4);
+}
 
-  .prefecture-card {
-    font-size: 0.9rem;
-    padding: 0.7rem 0.8rem;
-  }
+/* ===============================
+   スポットリスト項目
+================================= */
+.spot-list-item {
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.spot-list-item:hover {
+    background: #f3f4f6;
+}
+
+/* ===============================
+   スマホ対応
+================================= */
+@media (max-width: 768px) {
+    .app-main {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex: none;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid #d1d5db;
+    }
+
+    .map-view {
+        flex: 0 0 50vh;
+    }
+
+    .prefecture-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

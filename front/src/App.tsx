@@ -1,48 +1,48 @@
-import { useState, useEffect } from "react";
-import AreaSelector from "./components/AreaSelector";
-import MapView from "./components/MapView";
-import SpotList from "./components/SpotList";
-import type { Prefecture, FishingSpot } from "./types";
-import { getFishingSpots } from "./libs/api";
-import "./App.css";
+import { useState, useEffect } from 'react';
+import AreaSelector from './components/AreaSelector';
+import MapView from './components/MapView';
+import SpotList from './components/SpotList';
+import type { Prefecture, FishingSpot } from './types';
+import { getFishingSpots } from './libs/api';
+import './App.css';
 
 export default function App() {
-  const [selectedPref, setSelectedPref] = useState<Prefecture | null>(null);
-  const [spots, setSpots] = useState<FishingSpot[]>([]);
-  const [center, setCenter] = useState<[number, number]>([37.7749, 139.2394]); // 全国中心
+    const [selectedPref, setSelectedPref] = useState<Prefecture | null>(null);
+    const [spots, setSpots] = useState<FishingSpot[]>([]);
+    const [center, setCenter] = useState<[number, number]>([37.7749, 139.2394]);
 
-  useEffect(() => {
-    const fetchSpots = async () => {
-      const data = await getFishingSpots(selectedPref?.id);
-      setSpots(data);
-      if (selectedPref) setCenter(selectedPref.center);
-    };
-    fetchSpots();
-  }, [selectedPref]);
+    useEffect(() => {
+        const fetchSpots = async () => {
+            const data = await getFishingSpots(selectedPref?.id);
+            setSpots(data);
+            if (selectedPref) setCenter(selectedPref.center);
+        };
+        fetchSpots();
+    }, [selectedPref]);
 
-  return (
-    <div className="app-container">
-      <header className="app-header">釣り場マップ</header>
+    return (
+        <div className="app-container">
+            <header className="app-header">釣り場マップ</header>
 
-      <div className="app-main">
-        {/* 左：地図 */}
-        <section className="map-section">
-          <MapView center={center} spots={spots} />
-        </section>
+            <main className="app-main">
+                <div className="map-container">
+                    <div className="map-view">
+                        <MapView center={center} spots={spots} />
+                    </div>
+                    <div className="spot-list-wrapper">
+                        <h2 className="spot-section-title">釣り場一覧</h2>
+                        <SpotList spots={spots} />
+                    </div>
+                </div>
 
-        {/* 右：都道府県＆リスト */}
-        <aside className="sidebar">
-          <div className="sidebar-inner">
-            <h2 className="section-title">都道府県選択</h2>
-            <AreaSelector onSelectPrefecture={setSelectedPref} />
+                <aside className="sidebar">
+                    <div className="sidebar-inner">
+                        <AreaSelector onSelectPrefecture={setSelectedPref} />
+                    </div>
+                </aside>
+            </main>
 
-            <h3 className="section-title mt-4">釣り場一覧</h3>
-            <SpotList spots={spots} />
-          </div>
-        </aside>
-      </div>
-
-      <footer className="app-footer">© 2025 Fishing Map</footer>
-    </div>
-  );
+            <footer className="app-footer">© 2025 turioke</footer>
+        </div>
+    );
 }
