@@ -8,8 +8,13 @@ class Fishes extends Model
 {
     protected $fillable = ['name'];
 
-    public function fishingSpots()
+    public function spots()
     {
-        return $this->belongsToMany(FishingSpot::class, 'fishing_spot_fish');
+        return $this->belongsToMany(
+            FishingSpot::class,
+            'fishing_spot_fish',
+            'fish_id',
+            'fishing_spot_id'
+        );
     }
 }

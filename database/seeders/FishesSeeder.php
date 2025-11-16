@@ -10,13 +10,7 @@ class FishesSeeder extends Seeder
 {
     public function run()
     {
-        $fishes = [
-            ['name' => 'アジ'],
-            ['name' => 'サバ'],
-            ['name' => 'イワシ'],
-            ['name' => 'カサゴ'],
-            ['name' => 'タイ'],
-        ];
+        $fishes = require 'data/fishes/fishes.php';
 
         foreach ($fishes as $fish) {
             DB::table('fishes')->insert(array_merge($fish, [

@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FishesSeeder::class,           // 魚マスタ登録
             FishingSpotSeeder::class,      // 釣り場登録
-            FishingSpotFishSeeder::class,  // 中間テーブル登録
         ]);
     }
 }

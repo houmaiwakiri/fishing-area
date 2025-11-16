@@ -11,8 +11,13 @@ class FishingSpot extends Model
 
     protected $fillable = ['name', 'lat', 'lng', 'prefecture_id'];
 
-public function fishes()
-{
-    return $this->belongsToMany(Fishes::class, 'fishing_spot_fish');
-}
+    public function fishes()
+    {
+        return $this->belongsToMany(
+            Fishes::class,
+            'fishing_spot_fish',
+            'fishing_spot_id',
+            'fish_id'
+        )->withTimestamps();
+    }
 }
