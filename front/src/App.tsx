@@ -22,16 +22,22 @@ export default function App() {
 
     return (
         <div className="app-container">
-            <header className="app-header">釣り場マップ</header>
+            <header className="app-header">つりおけまっぷ</header>
 
             <main className="app-main">
                 <div className="map-container">
                     <div className="map-view">
-                        <MapView center={center} spots={spots} />
+                        <MapView
+                            center={center}
+                            spots={spots}
+                        />
                     </div>
                     <div className="spot-list-wrapper">
                         <h2 className="spot-section-title">釣り場一覧</h2>
-                        <SpotList spots={spots} />
+                        <SpotList
+                            spots={spots}
+                            onSelect={(lat, lng) => setCenter([lat, lng])}
+                        />
                     </div>
                 </div>
 
@@ -42,7 +48,7 @@ export default function App() {
                 </aside>
             </main>
 
-            <footer className="app-footer">© 2025 turioke</footer>
+            <footer className="app-footer">© 2025 turioke map</footer>
         </div>
     );
 }
