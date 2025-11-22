@@ -5,11 +5,14 @@ import SpotList from './components/SpotList';
 import type { Prefecture, FishingSpot } from './types';
 import { getFishingSpots } from './libs/api';
 import './App.css';
+import SpotDetailModal from './components/SpotDetailModel';
 
 export default function App() {
     const [selectedPref, setSelectedPref] = useState<Prefecture | null>(null);
     const [spots, setSpots] = useState<FishingSpot[]>([]);
     const [center, setCenter] = useState<[number, number]>([37.7749, 139.2394]);
+    const [selectedSpot, setSelectedSpot] = useState<FishingSpot | null>(null);
+
 
     useEffect(() => {
         const fetchSpots = async () => {
@@ -36,8 +39,20 @@ export default function App() {
                         <h2 className="spot-section-title">釣り場一覧</h2>
                         <SpotList
                             spots={spots}
-                            onSelect={(lat, lng) => setCenter([lat, lng])}
+                            onMove={(spot) => {
+                                setCenter([spot.lat, spot.lng]);
+                            }}
+                            onDetail={(spot) => {
+                                setSelectedSpot(spot);
+                            }}
                         />
+
+                        <SpotDetailModal
+                            spot={selectedSpot}
+                            onClose={() => setSelectedSpot(null)}
+                        />
+
+
                     </div>
                 </div>
 
@@ -47,7 +62,6 @@ export default function App() {
                     </div>
                 </aside>
             </main>
-
             <footer className="app-footer">© 2025 turioke map</footer>
         </div>
     );
