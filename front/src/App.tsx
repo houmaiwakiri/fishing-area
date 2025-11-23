@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import './App.css';
+import type { Prefecture, FishingSpot } from './types';
+import { getFishingSpots } from './libs/api';
 import AreaSelector from './components/AreaSelector';
 import MapView from './components/MapView';
 import SpotList from './components/SpotList';
-import type { Prefecture, FishingSpot } from './types';
-import { getFishingSpots } from './libs/api';
-import './App.css';
-import SpotDetailModal from './components/SpotDetailModel';
+import SpotDetail from './components/SpotDetail';
 
 export default function App() {
     const [selectedPref, setSelectedPref] = useState<Prefecture | null>(null);
@@ -47,7 +47,7 @@ export default function App() {
                             }}
                         />
 
-                        <SpotDetailModal
+                        <SpotDetail
                             spot={selectedSpot}
                             onClose={() => setSelectedSpot(null)}
                         />
