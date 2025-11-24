@@ -9,13 +9,13 @@ interface MapViewProps {
 
 function ChangeView({ center }: { center: [number, number] }) {
     const map = useMap();
-    map.setView(center, 10);
+    map.setView(center);
     return null;
 }
 
 export default function MapView({ center, spots }: MapViewProps) {
     return (
-        <MapContainer center={center} zoom={10} style={{ height: '80vh', width: '100%' }}>
+        <MapContainer center={center} zoom={5}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <ChangeView center={center} />
             {spots.map((spot) => (

@@ -8,9 +8,10 @@ import SpotList from './components/SpotList';
 import SpotDetail from './components/SpotDetail';
 
 export default function App() {
+    const JAPAN: [number, number] = [38.5, 138];
     const [selectedPref, setSelectedPref] = useState<Prefecture | null>(null);
     const [spots, setSpots] = useState<FishingSpot[]>([]);
-    const [center, setCenter] = useState<[number, number]>([37.7749, 139.2394]);
+    const [center, setCenter] = useState<[number, number]>(JAPAN);
     const [selectedSpot, setSelectedSpot] = useState<FishingSpot | null>(null);
 
 

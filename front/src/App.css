@@ -48,10 +48,7 @@
 }
 
 .map-view {
-    flex: 0 0 60vh;
-    background: #fff;
-    border-right: 1px solid #d1d5db;
-    overflow: hidden;
+    flex: 0 0 calc(60vh + 75px);
 }
 
 .map-view>div {
