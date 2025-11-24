@@ -10,7 +10,7 @@ export interface Region {
     prefectures: Prefecture[];
 }
 
-export interface Fishes {
+export interface Fish {
     id: number;
     name: string;
 }
@@ -21,5 +21,10 @@ export interface FishingSpot {
     prefecture_id: number;
     lat: number;
     lng: number;
-    fishes: Fishes[];
+    fishes: Fish[];
+}
+
+export interface MovePayload {
+    center: [number, number];
+    zoom: number;
 }
