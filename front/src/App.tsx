@@ -48,6 +48,7 @@ export default function App() {
                             center={center}
                             zoom={zoom}
                             spots={spots}
+                            onSelectSpot={(spot) => setSelectedSpot(spot)}
                         />
                     </div>
 
