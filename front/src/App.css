@@ -193,7 +193,10 @@
    スポットリスト項目
 ================================= */
 .spot-list-item {
-    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
     border-radius: 6px;
     margin-bottom: 4px;
     cursor: pointer;
@@ -317,4 +320,45 @@
     .prefecture-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* ===============================
+   釣り場一覧 + ランキング 横並び
+================================= */
+.spot-list-wrapper {
+    display: flex;
+    /* 横並びにする */
+    gap: 1rem;
+    /* 左右の間隔 */
+    padding: 0.8rem 1rem;
+    overflow-y: hidden;
+    /* 横並び時はスクロールを内部に分ける */
+    background: white;
+    border-top: 1px solid #e2e8f0;
+}
+
+.spot-list-wrapper>div {
+    flex: 1;
+    /* 左右均等 */
+    display: flex;
+    flex-direction: column;
+    /* 内部は縦並び */
+    max-height: 35vh;
+    /* 必要に応じて高さ調整 */
+    overflow-y: auto;
+    /* 内部スクロール */
+}
+
+/* 左側：釣り場一覧 */
+.spot-list-wrapper .spot-list {
+    flex: 1;
+}
+
+/* 右側：ランキング枠 */
+.spot-list-wrapper .ranking-wrapper {
+    flex: 1;
+    background: #f9fafb;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
 }

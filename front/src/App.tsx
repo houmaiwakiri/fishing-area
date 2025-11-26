@@ -52,15 +52,20 @@ export default function App() {
                         />
                     </div>
 
-                    <div className="spot-list-wrapper">
-                        <h2 className="spot-section-title">釣り場一覧</h2>
-                        <SpotList
-                            spots={spots}
-                            onMove={handleMove}
-                            onDetail={(spot) => {
-                                setSelectedSpot(spot);
-                            }}
-                        />
+                    <div className="spot-list-wrapper flex gap-4">
+                        <div className="flex-1">
+                            <h2 className="spot-section-title">釣り場一覧</h2>
+                            <SpotList
+                                spots={spots}
+                                onMove={handleMove}
+                                onDetail={(spot) => setSelectedSpot(spot)}
+                            />
+                        </div>
+
+                        <div className="flex-1 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <h2 className="spot-section-title">ランキング</h2>
+                            <div className="text-gray-400">ランキング内容は後で追加</div>
+                        </div>
 
                         <SpotDetail
                             spot={selectedSpot}
