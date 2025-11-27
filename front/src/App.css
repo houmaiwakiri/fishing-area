@@ -327,34 +327,26 @@
 ================================= */
 .spot-list-wrapper {
     display: flex;
-    /* 横並びにする */
     gap: 1rem;
-    /* 左右の間隔 */
     padding: 0.8rem 1rem;
-    overflow-y: hidden;
-    /* 横並び時はスクロールを内部に分ける */
     background: white;
     border-top: 1px solid #e2e8f0;
+    overflow: visible;
 }
 
-.spot-list-wrapper>div {
+
+.spot-list-wrapper > div {
     flex: 1;
-    /* 左右均等 */
     display: flex;
     flex-direction: column;
-    /* 内部は縦並び */
-    max-height: 35vh;
-    /* 必要に応じて高さ調整 */
+    max-height: none;
     overflow-y: auto;
-    /* 内部スクロール */
 }
 
-/* 左側：釣り場一覧 */
 .spot-list-wrapper .spot-list {
     flex: 1;
 }
 
-/* 右側：ランキング枠 */
 .spot-list-wrapper .ranking-wrapper {
     flex: 1;
     background: #f9fafb;
